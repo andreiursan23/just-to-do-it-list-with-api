@@ -13,11 +13,15 @@ import Home from './pages/Home';
 import Register from './pages/Register';
 import Login from './pages/Login';
 
+import { useSelector } from 'react-redux';
+
 import {
   BrowserRouter as Router,
   Switch,
-  Route
+  Route,
+  Redirect
 } from "react-router-dom";
+
 
 const theme = createTheme({
   palette: {
@@ -32,6 +36,17 @@ const theme = createTheme({
 });
 
 function App() {
+  // Check if user is authenticated
+  const token = useSelector(state => state.login.token);
+
+  const checkAuth = () => {
+    if (token !== '') {
+      return false
+    } else {
+      return true
+    }
+  }
+
   return (
     <ThemeProvider theme={theme}>
       <StyledEngineProvider injectFirst>
@@ -45,10 +60,14 @@ function App() {
               <Register />
             </Route>
 
-            <Route path="/login">
-              <Login />
+            <Route path="/login" render={() => (
+              checkAuth() ? (
+                <Login />
+              ) : (
+                <Redirect to="/dashboard" />
+              )
+            )}>
             </Route>
-
           </Switch>
         </Router>
       </StyledEngineProvider>

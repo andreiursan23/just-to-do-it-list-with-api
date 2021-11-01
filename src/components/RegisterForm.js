@@ -9,6 +9,7 @@ import Slide from '@mui/material/Slide';
 import { useDispatch, useSelector } from 'react-redux';
 import { registerUser } from '../store/register/register-actions';
 import { registerActions } from '../store/register/register-slice';
+import FormGroup from '@mui/material/FormGroup';
 
 import { useEffect, useState } from 'react';
 
@@ -85,25 +86,31 @@ const RegisterForm = () => {
     }
 
     return (
-        <Container maxWidth="sm" className="main-container">
+        <Container maxWidth="sm">
             <Box sx={{ 
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'center',
-                alignItems: 'center'
-            }} className="home-container">
-                <Typography variant="h3" component="h2" gutterBottom align="center" className="register-title">
+                alignItems: 'center',
+                minHeight: '100vh'
+            }}>
+                <Typography variant="h3" component="h2" gutterBottom align="center" sx={{color:'text.secondary', mb: 4 }}>
                     Register your acount
                 </Typography>
-                <form
-                    noValidate 
-                    autoComplete="off"
-                    className="register-form login-and-register-form"
+                <FormGroup
+                    sx={{
+                        border: 2,
+                        borderColor:'text.secondary',
+                        borderRadius: 3,
+                        boxShadow: 15,
+                        p: 3,
+                        minWidth: 330
+                    }}
                 >
                     <TextField
                         onChange={e => setFullName(e.target.value)}
                         error={validFullName}
-                        className='form-input'
+                        sx={{mb: 1.5}}
                         label="Full name"
                         helperText="Please enter your complete name"
                         variant="outlined"
@@ -114,7 +121,7 @@ const RegisterForm = () => {
                     <TextField
                         onChange={e => setEmail(e.target.value)}
                         error={validEmail}
-                        className='form-input'
+                        sx={{mb: 1.5}}
                         label="Email"
                         type="email"
                         helperText="Please enter your email address"
@@ -126,7 +133,7 @@ const RegisterForm = () => {
                     <TextField 
                         onChange={e => setPassword(e.target.value)}
                         error={validPassword}
-                        className='form-input'
+                        sx={{mb: 1.5}}
                         label="Password"
                         type="password"
                         helperText="Please enter your password"
@@ -138,7 +145,7 @@ const RegisterForm = () => {
                     <TextField
                         onChange={e => setAge(Number(e.target.value))}
                         error={validAge}
-                        className='form-input' 
+                        sx={{mb: 2}}
                         label="Age"
                         type="number"
                         helperText="Please enter your age"
@@ -153,11 +160,21 @@ const RegisterForm = () => {
                         variant="contained" 
                         size="large"
                         startIcon={<AccountCircleOutlinedIcon fontSize="large" />}
-                        className="sign-up-btn"
-                        >
+                        sx={{
+                            fontSize: {
+                                xs: 17,
+                                sm: 20,
+                                md: 21,
+                                lg: 22,
+                                xl: 22
+                            },
+                            minWidth: 150,
+                            alignSelf: 'center'
+                        }}
+                    >
                         Sign up
                     </Button>
-                </form>
+                </FormGroup>
 
                 {isSnackBar && 
                     <SnackBar 

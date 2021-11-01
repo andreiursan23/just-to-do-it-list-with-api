@@ -1,5 +1,3 @@
-import './App.css';
-
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
@@ -7,11 +5,14 @@ import '@fontsource/roboto/700.css';
 
 import { createTheme } from '@mui/material/styles';
 import { ThemeProvider } from '@emotion/react';
-import { StyledEngineProvider } from '@mui/material';
+import { responsiveFontSizes } from '@mui/material';
+import { Box } from '@mui/system';
+import CssBaseline from '@mui/material/CssBaseline'
 
 import Home from './pages/Home';
 import Register from './pages/Register';
 import Login from './pages/Login';
+import Dashboard from './pages/Dashboard';
 
 import { useSelector } from 'react-redux';
 
@@ -22,55 +23,80 @@ import {
   Redirect
 } from "react-router-dom";
 
-
-const theme = createTheme({
+// Custom culors for theme
+let theme = createTheme({
   palette: {
     primary: {
       main: '#32CD30',
       darker: '#2C5E1A',
     },
     success: {
-      main: '#32CD30',
+      main: '#2C5E1A',
     },
-  }
+    text: {
+      primary: '#2C5E1A',
+      secondary: '#32CD30',
+      success: '#e9f7f1'
+    },
+  },
+  breakpoints: {
+    values: {
+      xs: 0,
+      sm: 640,
+      md: 1920,
+      lg: 2560,
+      xl: 2561,
+    },
+  },
 });
+
+// Responsive fonts
+theme = responsiveFontSizes(theme);
 
 function App() {
   // Check if user is authenticated
-  const token = useSelector(state => state.login.token);
-
-  const checkAuth = () => {
-    if (token !== '') {
-      return false
-    } else {
-      return true
-    }
-  }
+  const isAuth = useSelector(state => state.login.isAuthenticated);
 
   return (
     <ThemeProvider theme={theme}>
-      <StyledEngineProvider injectFirst>
+      <CssBaseline>
         <Router>
-          <Switch>
-            <Route path="/" exact>
-              <Home />
-            </Route>
+          <Box sx={{bgcolor: '#e9f7f1'}}>
+            <Switch>
+              <Route path="/" exact>
+                <Home />
+              </Route>
 
-            <Route path="/register">
-              <Register />
-            </Route>
+              <Route path="/register" render={() => (
+                !isAuth ? (
+                  <Register />
+                ) : (
+                  <Redirect to="/dashboard" />
+                )
+              )}>
+              </Route>
 
-            <Route path="/login" render={() => (
-              checkAuth() ? (
-                <Login />
-              ) : (
-                <Redirect to="/dashboard" />
-              )
-            )}>
-            </Route>
-          </Switch>
+              <Route path="/login" render={() => (
+                !isAuth ? (
+                  <Login />
+                ) : (
+                  <Redirect to="/dashboard" />
+                )
+              )}>
+              </Route>
+
+              <Route path="/dashboard" render={() => (
+                isAuth ? (
+                  <Dashboard />
+                ) : (
+                  <Redirect to="/login" />
+                )
+              )}>
+              </Route>
+            </Switch>
+          </Box>
         </Router>
-      </StyledEngineProvider>
+      </CssBaseline>
     </ThemeProvider>
   );
 }

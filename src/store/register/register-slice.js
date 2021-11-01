@@ -23,4 +23,4 @@ const registerSlice = createSlice({
 });
 
 export const registerActions = registerSlice.actions;
-export default registerSlice;
+export default registerSlice.reducer;

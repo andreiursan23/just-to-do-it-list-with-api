@@ -3,8 +3,13 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
     isSnackBar: false,
     isSnackBarError: undefined,
+    showLoading: false,
     token: '',
-    name: ''
+    name: '',
+    _id: '',
+    age: 0,
+    email: '',
+    isAuthenticated: false,
 }
 
 const loginSlice = createSlice({
@@ -22,9 +27,27 @@ const loginSlice = createSlice({
         },
         updateName(state, action) {
             state.name = action.payload;
+        },
+        updateId(state, action) {
+            state._id = action.payload;
+        },
+        updateAge(state, action) {
+            state.age = action.payload;
+        },
+        updateEmail(state, action) {
+            state.email = action.payload;
+        },
+        login(state) {
+            state.isAuthenticated = true;
+        },
+        logout(state) {
+            state.isAuthenticated = false;
+        },
+        showLoading(state, action) {
+            state.showLoading = action.payload;
         }
     }
 });
 
 export const loginActions = loginSlice.actions;
-export default loginSlice;
+export default loginSlice.reducer;

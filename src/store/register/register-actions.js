@@ -22,8 +22,6 @@ export const registerUser = (fullName, email, password, age) => {
         fetch("https://api-nodejs-todolist.herokuapp.com/user/register", requestOptions)
             .then(response => response.json())
             .then(result => {
-                console.log(result);
-
                 if (typeof result === 'object') {
                     dispatch(registerActions.isSnackBarError(false));
                     dispatch(registerActions.isSnackBar(true));
@@ -32,6 +30,7 @@ export const registerUser = (fullName, email, password, age) => {
                     dispatch(registerActions.isSnackBarError(true));
                     dispatch(registerActions.isSnackBar(true));
                 }
-            });
+            })
+            .catch(err => console.log(err));
     }
 }

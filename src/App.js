@@ -17,10 +17,10 @@ import Dashboard from './pages/Dashboard';
 import { useSelector } from 'react-redux';
 
 import {
-  BrowserRouter as Router,
+  HashRouter as Router,
   Switch,
   Route,
-  Redirect
+  Redirect, 
 } from "react-router-dom";
 
 // Custom culors for theme

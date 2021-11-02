@@ -43,7 +43,6 @@ const LoginForm = () => {
 
     // Loading helper state
     const showLoading = useSelector(state => state.login.showLoading);
-
     const token = localStorage.getItem('token') ? localStorage.getItem('token') : null;
 
     // Redux helper states

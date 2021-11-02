@@ -6,7 +6,7 @@ export const getProfilePicture = (id) => {
         if (id) {
             axios
             .get(`https://api-nodejs-todolist.herokuapp.com/user/${id}/avatar`, {responseType: 'arraybuffer'})
-            .then(function (response) {
+            .then(response => {
                 let blob = new Blob(
                     [response.data], 
                     { type: response.headers['content-type'] }
@@ -45,10 +45,8 @@ export const uploadPicture = (token, formData) => {
                     throw new Error('Something went wrong...');
                 }
             })
-            .then(result => {
-                if (!result.error) {
-                    dispatch(profileActions.isChangePictureLoader(false));
-                }
+            .then(() => {
+                console.log('Image uploaded');
             })
             .catch(error => console.log('error', error));
     }

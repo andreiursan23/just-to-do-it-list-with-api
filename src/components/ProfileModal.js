@@ -5,10 +5,15 @@ import IconButton from '@mui/material/IconButton';
 import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import CircularProgress from '@mui/material/CircularProgress';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogTitle from '@mui/material/DialogTitle';
 import { styled } from '@mui/material/styles';
 
 import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
 import SaveIcon from '@mui/icons-material/Save';
+
+import { useHistory } from 'react-router';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { uploadPicture } from '../store/profle/profile-actions';
@@ -16,6 +21,7 @@ import { getProfilePicture } from '../store/profle/profile-actions';
 import { profileActions } from '../store/profle/profile-slice';
 
 import { useState } from 'react';
+
 
 const modalStyle = {
     position: 'absolute',
@@ -55,6 +61,7 @@ const Input = styled('input')({
 });
 
 const ProfileModal = ({ openModal, setOpenModal }) => {
+    // Helper selector for profile information display an actions
     const userName = useSelector(state => state.login.name);
     const token = useSelector(state => state.login.token);
     const age = useSelector(state => state.login.age);
@@ -68,7 +75,13 @@ const ProfileModal = ({ openModal, setOpenModal }) => {
 
     const dispatch = useDispatch();
 
-    const handleClose = () => {
+    // Dialog for profile picture update
+    const [isDialogOpen, setIsDialogOpen] = useState(false);
+    const history = useHistory();
+
+
+    // Helper functions for profile picture update
+    const handleCloseModal = () => {
         setOpenModal(false);
         setEnableSave(true);
     };
@@ -77,6 +90,10 @@ const ProfileModal = ({ openModal, setOpenModal }) => {
         setPictureToUpload(e.target.files[0]);
         setEnableSave(false);
     };
+
+    const handleDialogClose = () => {
+        history.push('/');
+    }
 
     const saveChanges = () => {
         if (typeof pictureToUpload.name === 'string') {
@@ -87,16 +104,18 @@ const ProfileModal = ({ openModal, setOpenModal }) => {
 
             dispatch(uploadPicture(token, formData));
             dispatch(getProfilePicture(_id));
+
+            setIsDialogOpen(true);
         }
     }
 
     return (
         <>
             <Modal
-                    open={openModal}
-                    onClose={handleClose}
-                    aria-labelledby="modal-modal-title"
-                    aria-describedby="modal-modal-description"
+                open={openModal}
+                onClose={handleCloseModal}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
             >
                 <Box sx={modalStyle}>
                     {isChangePictureLoader ? (
@@ -146,7 +165,7 @@ const ProfileModal = ({ openModal, setOpenModal }) => {
                                 }}
                             >
                                 <Typography id="modal-modal-description" variant="h5" component="p" sx={{ mb: 2, color:'text.primary' }}>
-                                    Click on the camera icon to upload/change your profile image.
+                                    Click on the camera icon to upload/change your <strong>profile image</strong>
                                 </Typography>
 
                                 <label htmlFor="contained-button-file" >
@@ -168,6 +187,20 @@ const ProfileModal = ({ openModal, setOpenModal }) => {
                                 Save
                             </Button>
                         </>)}
+
+                        <Dialog
+                            open={isDialogOpen}
+                            onClose={handleDialogClose}
+                            aria-labelledby="alert-dialog-title"
+                        >
+                            <DialogTitle id="alert-dialog-title" sx={{fontSize: 22}}>
+                                You will now have to log in, in order to see the changes take place
+                            </DialogTitle>
+
+                            <DialogActions>
+                                <Button onClick={handleDialogClose} sx={{fontSize: 20}}>OK</Button>
+                            </DialogActions>
+                        </Dialog>
                     </Box>
             </Modal>
         </>

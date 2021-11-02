@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
     profilePicture: undefined,
-    isChangePictureLoader: false
+    isChangePictureLoader: false,
 }
 
 const profileSlice = createSlice({

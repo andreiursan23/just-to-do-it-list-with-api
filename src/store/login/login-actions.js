@@ -29,17 +29,15 @@ export const loginUser = (email, password) => {
                     }
                 })
                 .then(result => {
-                    if (!result.error) {
-                        dispatch(loginActions.login());
-                        dispatch(loginActions.showLoading(false));
-                        dispatch(loginActions.updateName(result.name));
-                        dispatch(loginActions.updateId(result._id));
-                        dispatch(loginActions.updateAge(result.age));
-                        dispatch(loginActions.updateEmail(result.email));
+                    dispatch(loginActions.login());
+                    dispatch(loginActions.showLoading(false));
+                    dispatch(loginActions.updateName(result.name));
+                    dispatch(loginActions.updateId(result._id));
+                    dispatch(loginActions.updateAge(result.age));
+                    dispatch(loginActions.updateEmail(result.email));
                         
-                        dispatch(loginActions.updateToken(token));
-                        dispatch(getProfilePicture(result._id));
-                    }
+                    dispatch(loginActions.updateToken(token));
+                    dispatch(getProfilePicture(result._id));
                 })
                 .catch(err => console.log(err));
         } else {
@@ -64,11 +62,13 @@ export const loginUser = (email, password) => {
                     if (response.ok) {
                         return response.json()
                     } else {
-                        throw new Error('Something went wrong...')
+                        // Unsuccessful Login actions
+                        dispatch(loginActions.isSnackBarError(true));
+                        dispatch(loginActions.isSnackBar(true));
+                        throw new Error('Something went wrong...');
                     }
                 })
                 .then(result => {
-                    if (typeof result === 'object') {
                         // Successful Login actions
                         dispatch(loginActions.updateName(result.user.name));
                         dispatch(loginActions.updateToken(result.token));
@@ -78,15 +78,9 @@ export const loginUser = (email, password) => {
                         dispatch(loginActions.updateId(result.user._id));
                         dispatch(loginActions.updateAge(result.user.age));
                         dispatch(loginActions.updateEmail(result.user.email));
-
-                        // Set token in local storage
+                        
+                        localStorage.setItem('logedIn', 'true');
                         localStorage.setItem('token', result.token);
-                        localStorage.setItem('logedIn', true);
-                    } else {
-                        // Unsuccessful Login actions
-                        dispatch(loginActions.isSnackBarError(true));
-                        dispatch(loginActions.isSnackBar(true));
-                    }              
                 })
                 .catch(err => console.log(err))
         }
@@ -120,7 +114,6 @@ export const logoutUser = (token) => {
 
                 localStorage.getItem('token') && localStorage.removeItem('token');
                 localStorage.getItem('logedIn') && localStorage.removeItem('logedIn');
-                localStorage.getItem('id') && localStorage.removeItem('id');
             })
             .catch(err => console.log(err));
     }

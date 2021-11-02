@@ -44,7 +44,6 @@ const Dashboard = () => {
     
     // Profile editing selectors
     const profilePicture = useSelector(state => state.profile.profilePicture);
-    const isChangePictureLoader = useSelector(state => state.profile.isChangePictureLoader);
 
     const dispatch = useDispatch();
 
@@ -60,7 +59,7 @@ const Dashboard = () => {
     // Check if profile picture was uploaded
     useEffect(() => {
         dispatch(getProfilePicture(_id));
-    }, [_id, dispatch, isChangePictureLoader]);
+    }, [_id, dispatch]);
 
     // Logout user at click
     const openDeleteDialog = () => {

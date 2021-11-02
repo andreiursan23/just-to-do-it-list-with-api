@@ -47,7 +47,7 @@ const CreateTask = () => {
                             onChange={e => setInputedNewTask(e.target.value)}
                             value={inputedNewTask}
                             label="Add your new to do"
-                            type="email"
+                            type="text"
                             variant="outlined"
                             color="success"
                             size="medium"

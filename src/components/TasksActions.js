@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
-import { getAllTasks, getTasksByStatus, deleteTask } from "../store/tasks/tasks-actions";
+import { deleteTask } from "../store/tasks/tasks-actions";
 import { tasksActions } from "../store/tasks/tasks-slice";
 
 import DeleteForeverRoundedIcon from '@mui/icons-material/DeleteForeverRounded';
@@ -13,6 +13,7 @@ import { styled } from "@mui/system";
 
 import DialogBox from "./DialogBox";
 
+// Custom select setup to accommodate the style of the app
 const CustomInput = styled(InputBase)(({ theme }) => ({
     'label + &': {
         marginTop: theme.spacing(3)
@@ -39,20 +40,17 @@ const TasksAction = ({ tasksList }) => {
     const token = useSelector(state => state.login.token);
     const dispatch = useDispatch();
 
-    const handleChange = (e) => {
+    const handleSelectChange = (e) => {
         setFilterByCompletion(e.target.value);
     }
 
     useEffect(() => {
         if (filterByCompletion === 'all') {
             dispatch(tasksActions.tasksAreFiltered(false));
-            dispatch(getAllTasks(token));
         } else if (filterByCompletion === 'completed') {
-            dispatch(getTasksByStatus(token, true));
             dispatch(tasksActions.tasksAreFiltered(true));
             dispatch(tasksActions.isTaskCompleted(true));
         } else {
-            dispatch(getTasksByStatus(token, false));
             dispatch(tasksActions.tasksAreFiltered(true));
             dispatch(tasksActions.isTaskCompleted(false));
         }
@@ -94,7 +92,7 @@ const TasksAction = ({ tasksList }) => {
                 <FormControl sx={{ m: 0 }} variant="standard" fullWidth>
                     <NativeSelect
                         value={filterByCompletion}
-                        onChange={handleChange}
+                        onChange={handleSelectChange}
                         input={<CustomInput />}
                         sx={{
                             bgcolor: 'white',

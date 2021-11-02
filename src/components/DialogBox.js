@@ -11,13 +11,13 @@ const DialogBox = ({message, isOpen, handleApprove, handleClose}) => {
                 onClose={handleClose}
                 aria-labelledby="alert-dialog-title"
             >
-                <DialogTitle id="alert-dialog-title">
+                <DialogTitle id="alert-dialog-title" sx={{fontSize: 22}}>
                     {message}
                 </DialogTitle>
 
                 <DialogActions>
-                    <Button onClick={handleClose}>No</Button>
-                    <Button onClick={handleApprove} autoFocus>
+                    <Button onClick={handleClose} sx={{fontSize: 20}}>No</Button>
+                    <Button onClick={handleApprove} sx={{fontSize: 20}}>
                         Yes
                     </Button>
                 </DialogActions>

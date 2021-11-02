@@ -15,7 +15,6 @@ export const getProfilePicture = (id) => {
                 let imgUrl = URL.createObjectURL(blob)
                 
                 dispatch(profileActions.setProfilePicture(imgUrl));
-                dispatch(profileActions.isProfilePicture(true));
                 dispatch(profileActions.isChangePictureLoader(false));
             })
             .catch(function (error) {
@@ -47,11 +46,7 @@ export const uploadPicture = (token, formData) => {
                 }
             })
             .then(result => {
-                if (result.error) {
-                    dispatch(profileActions.isProfilePicture(false));
-                } else {
-                    dispatch(profileActions.isProfilePicture(true));
-                    localStorage.setItem('isProfilePicture', 'true');
+                if (!result.error) {
                     dispatch(profileActions.isChangePictureLoader(false));
                 }
             })

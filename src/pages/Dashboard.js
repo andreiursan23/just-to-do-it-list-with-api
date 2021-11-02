@@ -24,7 +24,6 @@ import CreateTask from '../components/CreateTask';
 import ProfileModal from '../components/ProfileModal';
 
 import DialogBox from '../components/DialogBox';
-import { profileActions } from '../store/profle/profile-slice';
 
 
 const Dashboard = () => {
@@ -45,7 +44,7 @@ const Dashboard = () => {
     
     // Profile editing selectors
     const profilePicture = useSelector(state => state.profile.profilePicture);
-    const isProfilePictureLocal = localStorage.getItem('isProfilePicture');
+    const isChangePictureLoader = useSelector(state => state.profile.isChangePictureLoader);
 
     const dispatch = useDispatch();
 
@@ -61,12 +60,7 @@ const Dashboard = () => {
     // Check if profile picture was uploaded
     useEffect(() => {
         dispatch(getProfilePicture(_id));
-        if (isProfilePictureLocal === 'true') {
-            dispatch(profileActions.isProfilePicture(true));
-        } else {
-            dispatch(profileActions.isProfilePicture(false));
-        }
-    }, [_id, dispatch, isProfilePictureLocal]);
+    }, [_id, dispatch, isChangePictureLoader]);
 
     // Logout user at click
     const openDeleteDialog = () => {

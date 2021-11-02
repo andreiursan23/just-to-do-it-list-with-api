@@ -30,7 +30,7 @@ const modalStyle = {
         xl: 500,
     },
     height: {
-        xs: 470,
+        xs: 510,
         sm: 500,
         md: 500,
         lg: 500,
@@ -60,7 +60,6 @@ const ProfileModal = ({ openModal, setOpenModal }) => {
     const age = useSelector(state => state.login.age);
     const email = useSelector(state => state.login.email);
     const profilePicture = useSelector(state => state.profile.profilePicture);
-    const isProfilePicture = useSelector(state => state.profile.isProfilePicture);
     const isChangePictureLoader = useSelector(state => state.profile.isChangePictureLoader);
     const _id = useSelector(state => state.login._id);
 
@@ -146,16 +145,10 @@ const ProfileModal = ({ openModal, setOpenModal }) => {
                                     mb: 1
                                 }}
                             >
-                                {!isProfilePicture ? (
-                                        <Typography id="modal-modal-description" variant="h5" component="p" sx={{ mb: 1, color:'text.primary' }}>
-                                            It looks like you don’t have an user image uploaded. Please choose one by clicking the right icon.
-                                        </Typography>
-                                    ) : (
-                                        <Typography id="modal-modal-description" variant="h5" component="p" sx={{ mb: 1, color:'text.primary' }}>
-                                            Do you want to change your profile picture?
-                                        </Typography>
-                                    )
-                                }
+                                <Typography id="modal-modal-description" variant="h5" component="p" sx={{ mb: 2, color:'text.primary' }}>
+                                    Click on the camera icon to upload/change your profile image.
+                                </Typography>
+
                                 <label htmlFor="contained-button-file" >
                                     <Input accept="image/*" id="contained-button-file" multiple type="file" onChange={handleInputedFile}/>
                                     <IconButton color="success" aria-label="upload picture" component="span" size="large">

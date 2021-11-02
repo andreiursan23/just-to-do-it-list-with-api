@@ -66,7 +66,7 @@ const Dashboard = () => {
         } else {
             dispatch(profileActions.isProfilePicture(false));
         }
-    }, [_id, dispatch, isProfilePictureLocal, profilePicture]);
+    }, [_id, dispatch, isProfilePictureLocal]);
 
     // Logout user at click
     const openDeleteDialog = () => {

@@ -14,13 +14,22 @@ export const getAllTasks = (token) => {
             headers: getAllTasksHeaders,
             redirect: 'follow'
         };
-        
-        fetch("https://api-nodejs-todolist.herokuapp.com/task", getAllTasksRequestOptions)
-            .then(response => response.json())
+
+        if (token) {
+            fetch("https://api-nodejs-todolist.herokuapp.com/task", getAllTasksRequestOptions)
+            .then(response => {
+                console.log(response);
+                if (response.ok) {
+                    return response.json()
+                } else {
+                    throw new Error('Something went wrong...')
+                }
+            })
             .then(result => {
                 dispatch(tasksActions.setCurrentTasks(result.data));
             })
             .catch(err => console.log(err));
+        }
     }
 }
 
@@ -44,7 +53,14 @@ export const addNewTask = (token, newTask) => {
         };
         
         fetch("https://api-nodejs-todolist.herokuapp.com/task", addNewTaskRequestOptions)
-            .then(response => response.json())
+            .then(response => {
+                console.log(response);
+                if (response.ok) {
+                    return response.json()
+                } else {
+                    throw new Error('Something went wrong...')
+                }
+            })
             .then(result => {
                 if (result.success) {
                     dispatch(tasksActions.wasTaskAdded());
@@ -70,7 +86,14 @@ export const deleteTask = (token, taskId) => {
         };
         
         fetch(`https://api-nodejs-todolist.herokuapp.com/task/${taskId}`, deleteTaskRequestOptions)
-            .then(response => response.json())
+            .then(response => {
+                console.log(response);
+                if (response.ok) {
+                    return response.json()
+                } else {
+                    throw new Error('Something went wrong...')
+                }
+            })
             .then(result => {
                 if (result.success) {
                     dispatch(tasksActions.wasTaskDeleted());
@@ -101,7 +124,14 @@ export const updateTaskCompletion = (token, taskId, newStatus) => {
         };
         
         fetch(`https://api-nodejs-todolist.herokuapp.com/task/${taskId}`, updateTaskCompletionOptions)
-            .then(response => response.json())
+            .then(response => {
+                console.log(response);
+                if (response.ok) {
+                    return response.json()
+                } else {
+                    throw new Error('Something went wrong...')
+                }
+            })
             .then(result => {
                 if (result.success) {
                     dispatch(tasksActions.wasTaskStatusChanged());
@@ -125,11 +155,20 @@ export const getTasksByStatus = (token, isStatus) => {
             redirect: 'follow'
         };
         
-        fetch(`https://api-nodejs-todolist.herokuapp.com/task?completed=${isStatus}`, getTasksByStatusRequestOptions)
-            .then(response => response.json())
+        if (isStatus) {
+            fetch(`https://api-nodejs-todolist.herokuapp.com/task?completed=${isStatus}`, getTasksByStatusRequestOptions)
+            .then(response => {
+                console.log(response);
+                if (response.ok) {
+                    return response.json()
+                } else {
+                    throw new Error('Something went wrong...')
+                }
+            })
             .then(result => {
                 dispatch(tasksActions.setCurrentTasks(result.data));
             })
             .catch(err => console.log(err));
+        }
     }
 }

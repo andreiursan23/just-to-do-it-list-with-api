@@ -3,7 +3,8 @@ import axios from "axios";
 
 export const getProfilePicture = (id) => {
     return (dispatch) => {
-        axios
+        if (id) {
+            axios
             .get(`https://api-nodejs-todolist.herokuapp.com/user/${id}/avatar`, {responseType: 'arraybuffer'})
             .then(function (response) {
                 let blob = new Blob(
@@ -20,6 +21,7 @@ export const getProfilePicture = (id) => {
             .catch(function (error) {
                 console.log(error);
             });
+        }
     }
 }
 
@@ -36,7 +38,14 @@ export const uploadPicture = (token, formData) => {
         };
         
         fetch("https://api-nodejs-todolist.herokuapp.com/user/me/avatar", uploadPictureRequestOptions)
-            .then(response => response.json())
+            .then(response => {
+                console.log(response);
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error('Something went wrong...');
+                }
+            })
             .then(result => {
                 if (result.error) {
                     dispatch(profileActions.isProfilePicture(false));

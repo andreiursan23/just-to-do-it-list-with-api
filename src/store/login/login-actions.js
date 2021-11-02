@@ -20,7 +20,14 @@ export const loginUser = (email, password) => {
             dispatch(loginActions.showLoading(true));
 
             fetch("https://api-nodejs-todolist.herokuapp.com/user/me", checkRequestOptions)
-                .then(response => response.json())
+                .then(response => {
+                    console.log(response);
+                    if (response.ok) {
+                        return response.json()
+                    } else {
+                        throw new Error('Something went wrong...')
+                    }
+                })
                 .then(result => {
                     if (!result.error) {
                         dispatch(loginActions.login());
@@ -52,7 +59,14 @@ export const loginUser = (email, password) => {
             };
 
             fetch("https://api-nodejs-todolist.herokuapp.com/user/login", requestOptions)
-                .then(response => response.json())
+                .then(response => {
+                    console.log(response);
+                    if (response.ok) {
+                        return response.json()
+                    } else {
+                        throw new Error('Something went wrong...')
+                    }
+                })
                 .then(result => {
                     if (typeof result === 'object') {
                         // Successful Login actions
@@ -91,7 +105,14 @@ export const logoutUser = (token) => {
         };
         
         fetch("https://api-nodejs-todolist.herokuapp.com/user/logout", logoutRequestOptions)
-            .then(response => response.json())
+            .then(response => {
+                console.log(response);
+                if (response.ok) {
+                    return response.json()
+                } else {
+                    throw new Error('Something went wrong...')
+                }
+            })
             .then(() => {
                 dispatch(loginActions.updateName(''));
                 dispatch(loginActions.updateToken(''));

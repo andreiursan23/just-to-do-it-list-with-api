@@ -155,20 +155,20 @@ export const getTasksByStatus = (token, isStatus) => {
             redirect: 'follow'
         };
         
-        if (isStatus) {
+        if (token) {
             fetch(`https://api-nodejs-todolist.herokuapp.com/task?completed=${isStatus}`, getTasksByStatusRequestOptions)
-            .then(response => {
-                console.log(response);
-                if (response.ok) {
-                    return response.json()
-                } else {
-                    throw new Error('Something went wrong...')
-                }
-            })
-            .then(result => {
-                dispatch(tasksActions.setCurrentTasks(result.data));
-            })
-            .catch(err => console.log(err));
+                .then(response => {
+                    console.log(response);
+                    if (response.ok) {
+                        return response.json()
+                    } else {
+                        throw new Error('Something went wrong...')
+                    }
+                })
+                .then(result => {
+                    dispatch(tasksActions.setCurrentTasks(result.data));
+                })
+                .catch(err => console.log(err));
         }
     }
 }

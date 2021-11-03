@@ -1,6 +1,7 @@
 .signupbtn {
     color: #00a200;
     text-decoration-line: none;
+    font-weight: bold;
 }
 
 .signupbtn:active {

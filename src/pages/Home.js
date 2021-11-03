@@ -61,7 +61,7 @@ const Home = () => {
                                     lg: 25,
                                     xl: 25
                                 },
-                                mt: 6,
+                                mt: 5,
                                 color: '#e9f7f1'
                             }}
                         >

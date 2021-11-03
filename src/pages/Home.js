@@ -40,7 +40,7 @@ const Home = () => {
                         align="center"
                         sx={{color: 'text.primary'}}
                     >
-                        JUST <strong style={{color: '#32CD30'}}>TO DO</strong> IT!
+                        JUST <strong style={{color: '#00a200'}}>TO DO</strong> IT!
                     </Typography>
 
                     <Typography variant="h4" component="h2" gutterBottom align="center" sx={{color: 'text.primary'}}>
@@ -61,7 +61,8 @@ const Home = () => {
                                     lg: 25,
                                     xl: 25
                                 },
-                                mt: 6
+                                mt: 6,
+                                color: '#e9f7f1'
                             }}
                         >
                             Log in now

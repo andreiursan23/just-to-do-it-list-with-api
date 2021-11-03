@@ -1,13 +1,10 @@
-import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
-import '@fontsource/roboto/500.css';
-import '@fontsource/roboto/700.css';
 
 import { createTheme } from '@mui/material/styles';
 import { ThemeProvider } from '@emotion/react';
 import { responsiveFontSizes } from '@mui/material';
 import { Box } from '@mui/system';
-import CssBaseline from '@mui/material/CssBaseline'
+import CssBaseline from '@mui/material/CssBaseline';
 
 import Home from './pages/Home';
 import Register from './pages/Register';
@@ -27,7 +24,7 @@ import {
 let theme = createTheme({
   palette: {
     primary: {
-      main: '#32CD30',
+      main: '#00a200',
       darker: '#2C5E1A',
     },
     success: {
@@ -35,7 +32,7 @@ let theme = createTheme({
     },
     text: {
       primary: '#2C5E1A',
-      secondary: '#32CD30',
+      secondary: '#00a200',
       success: '#e9f7f1'
     },
   },

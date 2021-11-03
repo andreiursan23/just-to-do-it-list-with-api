@@ -168,7 +168,8 @@ const LoginForm = () => {
                                             xl: 22
                                         },
                                         minWidth: 150,
-                                        alignSelf: 'center'
+                                        alignSelf: 'center',
+                                        color: '#e9f7f1'
                                     }}
                                 >
                                     Log in

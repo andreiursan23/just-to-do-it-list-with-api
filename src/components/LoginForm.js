@@ -187,7 +187,7 @@ const LoginForm = () => {
                                     minWidth: 330 
                                 }}
                             >
-                                <Typography variant="h6" component="p" gutterBottom align="center" sx={{color: 'rgba(0, 0, 0, 0.4)', m: 0}}>
+                                <Typography variant="h6" component="p" gutterBottom align="center" sx={{color: 'rgba(0, 0, 0, 0.6)', m: 0}}>
                                     Don't have an account? <NavLink to="/register" className={classes.signupbtn}>Sign up</NavLink>
                                 </Typography>
                             </FormGroup>

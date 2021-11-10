@@ -1,0 +1,13 @@
+.signupbtn {
+  color: #00a200;
+  text-decoration-line: none;
+  font-weight: bold;
+}
+
+.signupbtn:active {
+  color: #00a200;
+}
+
+.signupbtn:hover {
+  color: #2c5e1a;
+}

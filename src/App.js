@@ -1,40 +1,40 @@
-import '@fontsource/roboto/400.css';
-import '@fontsource/roboto/300.css';
+import "@fontsource/roboto/400.css";
+import "@fontsource/roboto/300.css";
 
-import { createTheme } from '@mui/material/styles';
-import { ThemeProvider } from '@emotion/react';
-import { responsiveFontSizes } from '@mui/material';
-import { Box } from '@mui/system';
-import CssBaseline from '@mui/material/CssBaseline';
+import { createTheme } from "@mui/material/styles";
+import { ThemeProvider } from "@emotion/react";
+import { responsiveFontSizes } from "@mui/material";
+import { Box } from "@mui/system";
+import CssBaseline from "@mui/material/CssBaseline";
 
-import Home from './pages/Home';
-import Register from './pages/Register';
-import Login from './pages/Login';
-import Dashboard from './pages/Dashboard';
+import Home from "./pages/Home";
+import Register from "./pages/Register";
+import Login from "./pages/Login";
+import Dashboard from "./pages/Dashboard";
 
-import { useSelector } from 'react-redux';
+import { useSelector } from "react-redux";
 
 import {
   HashRouter as Router,
   Switch,
   Route,
-  Redirect, 
+  Redirect,
 } from "react-router-dom";
 
 // Custom culors for theme
 let theme = createTheme({
   palette: {
     primary: {
-      main: '#00a200',
-      darker: '#2C5E1A',
+      main: "#00a200",
+      darker: "#2C5E1A",
     },
     success: {
-      main: '#2C5E1A',
+      main: "#2C5E1A",
     },
     text: {
-      primary: '#2C5E1A',
-      secondary: '#00a200',
-      success: '#e9f7f1'
+      primary: "#2C5E1A",
+      secondary: "#00a200",
+      success: "#e9f7f1",
     },
   },
   breakpoints: {
@@ -53,44 +53,38 @@ theme = responsiveFontSizes(theme);
 
 function App() {
   // Check if user is authenticated
-  const isAuth = useSelector(state => state.login.isAuthenticated);
+  const isAuth = useSelector((state) => state.login.isAuthenticated);
 
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline>
         <Router>
-          <Box sx={{bgcolor: '#e9f7f1'}}>
+          <Box sx={{ bgcolor: "#e9f7f1" }}>
             <Switch>
               <Route path="/" exact>
                 <Home />
               </Route>
 
-              <Route path="/register" render={() => (
-                !isAuth ? (
-                  <Register />
-                ) : (
-                  <Redirect to="/dashboard" />
-                )
-              )}>
-              </Route>
+              <Route
+                path="/register"
+                render={() =>
+                  !isAuth ? <Register /> : <Redirect to="/dashboard" />
+                }
+              ></Route>
 
-              <Route path="/login" render={() => (
-                !isAuth ? (
-                  <Login />
-                ) : (
-                  <Redirect to="/dashboard" />
-                )
-              )}>
-              </Route>
+              <Route
+                path="/login"
+                render={() =>
+                  !isAuth ? <Login /> : <Redirect to="/dashboard" />
+                }
+              ></Route>
 
-              <Route path="/dashboard" render={() => (
-                isAuth ? (
-                  <Dashboard />
-                ) : (
-                  <Redirect to="/login" />
-                )
-              )}>
-              </Route>
+              <Route
+                path="/dashboard"
+                render={() =>
+                  isAuth ? <Dashboard /> : <Redirect to="/login" />
+                }
+              ></Route>
             </Switch>
           </Box>
         </Router>

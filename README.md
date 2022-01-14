@@ -13,7 +13,7 @@
     <a href="https://github.com/andreiursan23/just-to-do-it-list-with-api"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://just-to-do-it-app.netlify.app/#/login">View Demo</a>
+    <a href="https://just-to-do-it-app.netlify.app/#/">View Demo</a>
     ·
   </p>
 </div>
@@ -118,4 +118,4 @@ Project Link: [https://github.com/andreiursan23/just-to-do-it-list-with-api](htt
 [license-url]: https://github.com/andreiursan23/just-to-do-it-list-with-api/blob/main/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://www.linkedin.com/in/andreiursan/
-[product-screenshot]: images/screenshot.jpg
+[product-screenshot]: /images/screenshot.JPG

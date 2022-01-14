@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { TextField, Box, IconButton, Grid } from "@mui/material";
+import { TextField, Box, IconButton, Grid, Tooltip } from "@mui/material";
 
 import AddCircleRoundedIcon from "@mui/icons-material/AddCircleRounded";
 
@@ -9,7 +9,7 @@ import { addNewTask } from "../../store/tasks/tasks-actions";
 
 import TasksAction from "../TaskFilters/TaskFilters";
 
-const CreateTask = ({ tasksList }) => {
+const CreateTask = () => {
   const [inputedNewTask, setInputedNewTask] = useState("");
 
   const dispatch = useDispatch();
@@ -57,12 +57,14 @@ const CreateTask = ({ tasksList }) => {
               size="medium"
               InputProps={{
                 endAdornment: (
-                  <IconButton size="large" onClick={addTask}>
-                    <AddCircleRoundedIcon
-                      fontSize="large"
-                      sx={{ color: "text.primary" }}
-                    />
-                  </IconButton>
+                  <Tooltip title="Create new task">
+                    <IconButton size="large" onClick={addTask}>
+                      <AddCircleRoundedIcon
+                        fontSize="large"
+                        sx={{ color: "text.primary" }}
+                      />
+                    </IconButton>
+                  </Tooltip>
                 ),
               }}
               sx={{

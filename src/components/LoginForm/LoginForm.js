@@ -239,7 +239,6 @@ const LoginForm = () => {
                 <Button
                   onClick={() => logInUser(TransitionDown, "demo")}
                   variant="contained"
-                  disabled={validAllInputs}
                   size="small"
                   sx={{
                     mt: 1,

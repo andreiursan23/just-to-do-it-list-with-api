@@ -3,7 +3,13 @@ import { deleteTask } from "../../store/tasks/tasks-actions";
 import { updateTaskCompletion } from "../../store/tasks/tasks-actions";
 import { tasksActions } from "../../store/tasks/tasks-slice";
 
-import { ListItem, IconButton, Checkbox, Typography } from "@mui/material";
+import {
+  ListItem,
+  IconButton,
+  Checkbox,
+  Typography,
+  Tooltip,
+} from "@mui/material";
 
 import DeleteIcon from "@mui/icons-material/Delete";
 
@@ -19,26 +25,29 @@ const SingleTask = ({ task, id, isCompleted }) => {
   return (
     <>
       <ListItem sx={isCompleted ? { bgcolor: "text.secondary" } : {}}>
-        <Checkbox
-          checked={isCompleted}
-          onChange={handleChange}
-          sx={
-            isCompleted
-              ? {
-                  color: "white",
-                  "&.Mui-checked": {
+        <Tooltip title="Mark completed">
+          <Checkbox
+            checked={isCompleted}
+            onChange={handleChange}
+            sx={
+              isCompleted
+                ? {
                     color: "white",
-                  },
-                }
-              : {
-                  color: "text.primary",
-                  "&.Mui-checked": {
+                    "&.Mui-checked": {
+                      color: "white",
+                    },
+                  }
+                : {
                     color: "text.primary",
-                  },
-                }
-          }
-          size="large"
-        />
+                    "&.Mui-checked": {
+                      color: "text.primary",
+                    },
+                  }
+            }
+            size="large"
+          />
+        </Tooltip>
+
         <Typography
           variant="h5"
           component="p"
@@ -59,15 +68,17 @@ const SingleTask = ({ task, id, isCompleted }) => {
         >
           {task}
         </Typography>
-        <IconButton
-          onClick={() => dispatch(deleteTask(token, id))}
-          size="large"
-        >
-          <DeleteIcon
-            fontSize="large"
-            sx={isCompleted ? { color: "white" } : { color: "text.primary" }}
-          />
-        </IconButton>
+        <Tooltip title="Delete this task">
+          <IconButton
+            onClick={() => dispatch(deleteTask(token, id))}
+            size="large"
+          >
+            <DeleteIcon
+              fontSize="large"
+              sx={isCompleted ? { color: "white" } : { color: "text.primary" }}
+            />
+          </IconButton>
+        </Tooltip>
       </ListItem>
     </>
   );

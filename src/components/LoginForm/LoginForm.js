@@ -77,7 +77,7 @@ const LoginForm = () => {
   };
 
   // Log in User function
-  const logInUser = (Transition) => {
+  const logInUser = (Transition, demo) => {
     setTransition(() => Transition);
 
     // Remove logedIn token if it exists
@@ -85,7 +85,11 @@ const LoginForm = () => {
       localStorage.removeItem("logedIn");
     }
 
-    dispatch(loginUser(email, password));
+    if (!demo) {
+      dispatch(loginUser(email, password));
+    } else {
+      dispatch(loginUser("testuser@demo.com", "1234567"));
+    }
 
     setOpen(true);
 
@@ -210,6 +214,49 @@ const LoginForm = () => {
                     Sign up
                   </NavLink>
                 </Typography>
+              </FormGroup>
+
+              <FormGroup
+                sx={{
+                  border: 2,
+                  borderColor: "text.secondary",
+                  borderRadius: 3,
+                  boxShadow: 15,
+                  mt: 3,
+                  p: 1.5,
+                  minWidth: 330,
+                }}
+              >
+                <Typography
+                  variant="h6"
+                  component="p"
+                  gutterBottom
+                  align="center"
+                  sx={{ color: "rgba(0, 0, 0, 0.7)", m: 0 }}
+                >
+                  Want to demo the app?
+                </Typography>
+                <Button
+                  onClick={() => logInUser(TransitionDown, "demo")}
+                  variant="contained"
+                  disabled={validAllInputs}
+                  size="small"
+                  sx={{
+                    mt: 1,
+                    fontSize: {
+                      xs: 17,
+                      sm: 20,
+                      md: 21,
+                      lg: 22,
+                      xl: 22,
+                    },
+                    minWidth: 150,
+                    alignSelf: "center",
+                    color: "#e9f7f1",
+                  }}
+                >
+                  Demo app
+                </Button>
               </FormGroup>
 
               {isSnackBar && (

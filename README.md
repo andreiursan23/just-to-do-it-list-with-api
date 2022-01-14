@@ -1,6 +1,5 @@
 <div id="top"></div>
 
-[![MIT License][license-shield]][license-url]
 [![LinkedIn][linkedin-shield]][linkedin-url]
 
 <!-- PROJECT INTRO -->
@@ -119,4 +118,4 @@ Project Link: [https://github.com/andreiursan23/just-to-do-it-list-with-api](htt
 [license-url]: https://github.com/andreiursan23/just-to-do-it-list-with-api/blob/main/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://www.linkedin.com/in/andreiursan/
-[product-screenshot]: images/screenshot.png
+[product-screenshot]: images/screenshot.jpg
